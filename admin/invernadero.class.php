@@ -1,5 +1,5 @@
 <?php
-    include('../sistema.class.php');
+    require_once('../sistema.class.php');
 
     class Invernadero extends Sistema{
         function create($data){
@@ -38,8 +38,6 @@
             $modificar->bindParam(':id_invernadero',$id,PDO::PARAM_INT);
             $modificar->execute();
             $result=$modificar->rowCount();
-
-            
 
             return $result;
         }
