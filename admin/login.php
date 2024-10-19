@@ -10,14 +10,20 @@
         case 'login':
             $correo = $_POST['data']['correo'];
             $contrasena = $_POST['data']['contrasena'];
-            echo($app->login($correo, $contrasena));
+            //echo($app->login($correo, $contrasena));
             if($app->login($correo, $contrasena)){
-                echo("Acceso correcto");
-                echo('<pre>');
-                print_r($_SESSION);
+                $mensaje = "Bienvenido al sistema";
+                $tipo = "success";
+                $app->checkRol('Administrador');
+                require_once('views/header/header_administrador.php');
+                $app->alerta($tipo, $mensaje);
+                //plantillas personalizadas de bienvenida
             } else {
-                echo("No se pudo ingresar");
-                print_r($_SESSION);
+                $mensaje = "Correo o contraseña no validos <a href='login.php'>[Presione aqui para volver a intentar.]</a>";
+                $tipo = "danger";
+                require_once('views/header.php');
+                $app->alerta($tipo, $mensaje);
+
             }
             die();
         case 'logout':
@@ -28,6 +34,7 @@
             break;
 
     }
+    require_once('views/footer.php');
 
     
 

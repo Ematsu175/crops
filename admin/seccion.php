@@ -3,6 +3,7 @@
     require_once('invernadero.class.php');
     $appInvernadero = new Invernadero;
     $app = new Seccion;
+    $app->checkRol('Administrador');
     $accion = (isset($_GET['accion']))?$_GET['accion']:null;
     $id = (isset($_GET['id']))?$_GET['id']:null;
 
@@ -65,8 +66,10 @@
             include('views/seccion/index.php');
             
             break;
-        case 'default':
+        default:
             $secciones=$app->readAll();
             include('views/seccion/index.php');
     }
+
+    require_once('views/footer.php');
 ?>

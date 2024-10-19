@@ -84,14 +84,33 @@
         function logout(){
             unset($_SESSION);
             session_destroy();
+            $mensaje = "Gracias por utilizar el sistema, se ha cerrado la sesión. <a href='login.php'>[Presione aqí para volver a entrar]</a>";
+            $tipo = "success";
+            require_once('views/header.php');
+            $this->alerta($tipo, $mensaje);
+            require_once('views/footer.php');
         }
 
         function checkRol($rol){
-            $roles = $_SESSION['roles'];
-            if(!in_array($rol, $roles)){
-                echo('ERROR no tienes el rol');
+            if(isset($_SESSION['roles'])){
+                $roles = $_SESSION['roles'];
+                if(!in_array($rol, $roles)){
+                    $mensaje = "Error usted no tiene el rol adecuado";
+                    $tipo = "danger";
+                    require_once('views/header/alert.php');
+                    $this->alerta($tipo, $mensaje);
+                    die();
+                }
+                
+            } else {
+                $mensaje = "Requiere iniciar sesión. <a href='login.php'>[Presione aqí para volver a entrar]</a>";
+                $tipo = "danger";
+                require_once('views/header.php');
+                $this->alerta($tipo, $mensaje);
+                require_once('views/footer.php');
                 die();
             }
+            
         }
     }
 

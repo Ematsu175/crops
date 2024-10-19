@@ -1,5 +1,6 @@
 <?php
     require_once('invernadero.class.php');
+
     $app = new Invernadero;
     $app->checkRol('Administrador');
     $accion = (isset($_GET['accion']))?$_GET['accion']:null;
@@ -66,4 +67,6 @@
             $invernaderos=$app->readAll();
             include('views/invernadero/index.php');
     }
+
+    require_once('views/footer.php');
 ?>

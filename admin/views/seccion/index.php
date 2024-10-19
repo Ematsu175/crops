@@ -1,4 +1,5 @@
 <?php require ('views/header.php') ?>
+<?php require ('views/header/header_administrador.php') ?>
     <h1>Sección</h1>
     <?php if(isset($mensaje)):$app->alerta($tipo,$mensaje); endif; ?>
     <a href="seccion.php?accion=crear" class="btn btn-success">Nuevo</a>
