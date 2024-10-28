@@ -7,10 +7,11 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Seccion</th>
-                <th scope="col">Area</th>
+                <th scope="col">seccion</th>
+                <th scope="col">area</th>
                 <th scope="col">Invernadero</th>
                 <th scope="col">Opciones</th>
+
             </tr>
         </thead>
         <tbody>
