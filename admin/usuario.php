@@ -1,8 +1,6 @@
 <?php
     require_once('usuario.class.php');
-    require_once('seccion.class.php');
-    require_once('invernadero.class.php');
-    $appInvernadero = new Invernadero;
+    include('roles.class.php');
     $app = new Usuario;
     $appRoles = new Roles;
     $app->checkRol('Administrador');
@@ -10,47 +8,46 @@
     $id = (isset($_GET['id']))?$_GET['id']:null;
 
     switch($accion){
-        case 'crear':
-            $invernadero = $appInvernadero->readAll();
+        case 'crear':            
+            $roles=$appRoles->readAll();
+            //print_r($roles);
             include('views/usuario/crear.php');
             break;
         case 'nuevo':
-            $data=$_POST['data'];
+            $data=$_POST;
             $resultado=$app->create($data);
             if($resultado){
-                $mensaje="Sección dado de alta correctamente";
+                $mensaje="Usuario dado de alta correctamente";
                 $tipo="success";
 
             } else {
-                $mensaje="Hubo un error al momento de agregar la sección";
+                $mensaje="Hubo un error al momento de agregar el usuario";
                 $tipo="danger";
             }
-            $secciones=$app->readAll();
-            include('views/seccion/index.php');
+            $usuarios=$app->readAll();
+            include('views/usuario/index.php');
             break;
 
         case 'actualizar':
-            $secciones=$app->readOne($id);
-            $invernadero= $appInvernadero->readAll();
-            include('views/seccion/crear.php');
+            $usuarios=$app->readOne($id);
+            $roles=$appRoles->readAll();
+            include('views/usuario/crear.php');
             break;
         
         case 'modificar':
             $data=$_POST['data'];
             $result = $app->update($id,$data);
-            $roles = $appRoles->readAll();
-            
             //print_r($result);
             if($result){
-                $mensaje="Sección actualizado correctamente";
+                $mensaje="Permiso actualizado correctamente";
                 $tipo="success";
 
             } else {
-                $mensaje="Hubo un error no se pudo actualizar la sección";
+                $mensaje="Hubo un error no se pudo actualizar el permiso";
                 $tipo="danger";
             }
-            $secciones=$app->readAll();
-            include('views/seccion/index.php');
+            $usuarios=$app->readAll();
+            include('views/usuario/index.php');
             break;
 
         case 'eliminar':           
@@ -58,16 +55,16 @@
                 if(is_numeric($id)){
                     $resultado = $app->delete($id);
                     if ($resultado) {
-                        $mensaje = "La sección se elimino correctamente";
+                        $mensaje = "El permiso se elimino correctamente";
                         $tipo = "success";
                     } else {
-                        $mensaje = "Error no se elimino la sección";
+                        $mensaje = "Error no se elimino el permiso";
                         $tipo = "danger";
                     }
                 }
             }
-            $secciones=$app->readAll();
-            include('views/seccion/index.php');
+            $usuarios=$app->readAll();
+            include('views/usuario/index.php');
             
             break;
         default:
