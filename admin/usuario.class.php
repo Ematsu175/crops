@@ -6,9 +6,9 @@
             print_r($data);
             //die();         
             $this->conexion();
-            $rol = $data['rol'];
+            $rol=$data['rol'];
             //print_r($rol);
-            $data = $data['data'];
+            $data=$data['data'];
             //print_r($data);
             
             //marcar al menos dos roles
@@ -16,15 +16,15 @@
             try {
                 $sql="insert into usuario(correo,contrasena) 
                       values (:correo,md5(:contrasena));";
-                $insertar = $this->con->prepare($sql);
+                $insertar=$this->con->prepare($sql);
                 $insertar->bindParam(':correo',$data['correo'],PDO::PARAM_STR);
                 $insertar->bindParam(':contrasena',$data['contrasena'],PDO::PARAM_STR);
                 $insertar->execute();
-                $sql = "select id_usuario from usuario where correo=:correo;";
+                $sql="select id_usuario from usuario where correo=:correo;";
                 $consulta = $this->con->prepare($sql);
                 $consulta->bindParam('correo', $data['correo'], PDO::PARAM_STR);
                 $consulta->execute();
-                $datos = $consulta->fetch(PDO::FETCH_ASSOC);
+                $datos=$consulta->fetch(PDO::FETCH_ASSOC);
                 $id_usuario = (isset($datos['id_usuario']))? $datos['id_usuario'] :null;
                 if(!is_null($id_usuario)){
                     foreach($rol as $r => $k){
@@ -33,7 +33,7 @@
                         //print_r($r);
                         $sql = "insert into usuario_rol(id_usuario, id_rol) 
                                 values (:id_usuario, :id_rol)";
-                        $insertar_usuario_rol = $this->con->prepare($sql);
+                        $insertar_usuario_rol=$this->con->prepare($sql);
                         $insertar_usuario_rol->bindParam('id_usuario', $id_usuario, PDO::PARAM_INT);
                         $insertar_usuario_rol->bindParam('id_rol', $r, PDO::PARAM_INT);
                         $insertar_usuario_rol->execute();
