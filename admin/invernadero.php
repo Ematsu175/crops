@@ -32,7 +32,7 @@
         
         case 'modificar':
             $data=$_POST['data'];
-            $result = $app->update($id,$data);
+            $result=$app->update($id,$data);
             //print_r($result);
             if($result){
                 $mensaje="Invernadero actualizado correctamente";

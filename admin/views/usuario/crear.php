@@ -4,7 +4,7 @@
     <div class="mb-3">
         <label for="correo" class="form-label">Correo</label>
         <input type="text" class="form-control" name="data[correo]" placeholder="Escribe aqui el correo del usuario" 
-        value="<?php if(isset($usuario['correo'])):echo($usuario['correo']);endif; ?>" />
+        value="<?php if(isset($usuarios['correo'])):echo($usuarios['correo']);endif; ?>" />
     </div>
     <div class="mb-3">
         <label for="contrasena" class="form-label">Contraseña</label>
@@ -15,7 +15,7 @@
     <?php foreach($roles as $rol):?>
     <div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="rol[<?php echo($rol['id_rol']);?>]">
+            <input class="form-check-input" type="checkbox" <?php $checked=''; if(in_array($rol['id_rol'], $misRoles)):$checked='checked';endif; echo($checked)?> role="switch" id="flexSwitchCheckChecked" name="rol[<?php echo($rol['id_rol']);?>]">
             <label class="form-check-label" for="flexSwitchCheckChecked"><?php echo($rol['rol']);?></label>
         </div>
     </div>

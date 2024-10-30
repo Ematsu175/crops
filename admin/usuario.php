@@ -31,19 +31,22 @@
         case 'actualizar':
             $usuarios=$app->readOne($id);
             $roles=$appRoles->readAll();
+            $misRoles=$app->readAllRoles($id);
+            
             include('views/usuario/crear.php');
             break;
         
         case 'modificar':
-            $data=$_POST['data'];
+            $data=$_POST;
+            
             $result = $app->update($id,$data);
             //print_r($result);
             if($result){
-                $mensaje="Permiso actualizado correctamente";
+                $mensaje="Usuario actualizado correctamente";
                 $tipo="success";
 
             } else {
-                $mensaje="Hubo un error no se pudo actualizar el permiso";
+                $mensaje="Hubo un error no se pudo actualizar el usuario";
                 $tipo="danger";
             }
             $usuarios=$app->readAll();

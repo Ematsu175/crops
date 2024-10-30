@@ -52,18 +52,50 @@
 
         function update($id, $data){
             $this->conexion();
+            $rol=$data['rol'];
             $result=[];
-            $sql = 'update usuario set usuario=:usuario, 
+            $data=$data['data'];
+            $this->con->beginTransaction();
+            try {
+                $sql = 'update usuario set correo=:correo, 
                                             contrasena=md5(:contrasena)
                                             where id_usuario=:id_usuario';
-            $modificar=$this->con->prepare($sql);
-            $modificar->bindParam(':usuario',$data['usuario'],PDO::PARAM_STR);
-            $modificar->bindParam(':contrasena',$data['contrasena'],PDO::PARAM_INT);
-            $modificar->bindParam(':id_usuario',$id,PDO::PARAM_INT);
-            $modificar->execute();
-            $result=$modificar->rowCount();
+                $modificar=$this->con->prepare($sql);
+                //echo($data['data']['contrasena']);
+                //die();
+                $modificar->bindParam(':correo',$data['correo'],PDO::PARAM_STR);
+                $modificar->bindParam(':contrasena',$data['contrasena'],PDO::PARAM_INT);
+                $modificar->bindParam(':id_usuario',$id,PDO::PARAM_INT);
+                $modificar->execute();
+                $sql = "delete from usuario_rol where id_usuario=:id_usuario;";
+                $borrar_rol = $this->con->prepare($sql);
+                $borrar_rol->bindParam(':id_usuario',$id, PDO::PARAM_INT);
+                $borrar_rol->execute();
+                if(!is_null($id)){
+                    foreach($rol as $r => $k){
+                        //echo($k); //antes de hacer el isnert hayq ue saber que se esta recuperando
+                        //print($rol);
+                        //print_r($r);
+                        $sql = "insert into usuario_rol(id_usuario, id_rol) 
+                                values (:id_usuario, :id_rol)";
+                        $insertar_usuario_rol=$this->con->prepare($sql);
+                        $insertar_usuario_rol->bindParam('id_usuario', $id, PDO::PARAM_INT);
+                        $insertar_usuario_rol->bindParam('id_rol', $r, PDO::PARAM_INT);
+                        $insertar_usuario_rol->execute();
+                    }
+                    $this->con->commit();
+                    return $insertar_usuario_rol->rowCount();
+                        
+                }
+                $this->con->commit();
+                $result=$modificar->rowCount();               
+                //return $result;
 
-            return $result;
+            } catch (Exception $e) {
+                $this->con->rollBack();
+            }
+            return false;
+            
         }
 
         function delete($id){          
@@ -100,7 +132,7 @@
 
         function readAllRoles($id){
             $this->conexion();
-            $consulta= "select u.id_usuario,u.correo,r.rol 
+            $consulta= "select distinct r.id_rol
                         from usuario u 
                         inner join usuario_rol ur on u.id_usuario=ur.id_usuario 
                         inner join rol r on ur.id_rol=r.id_rol 
@@ -108,7 +140,13 @@
             $sql = $this->con->prepare($consulta);
             $sql->bindParam("id_usuario", $id, PDO::PARAM_INT);
             $sql->execute();
-            return $sql->fetchAll(PDO::FETCH_ASSOC);
+            $roles=[];
+            $roles=$sql->fetchAll(PDO::FETCH_ASSOC);
+            $data=[];
+            foreach ($roles as $rol) {
+                array_push($data, $rol['id_rol']);
+            }
+            return $data;
         }
     }
 ?>
