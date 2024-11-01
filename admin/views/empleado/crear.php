@@ -1,6 +1,6 @@
 <?php require('views/header/header_administrador.php'); ?>
-<h1> <?php if($accion=="crear"):echo('Nuevo');else: echo('Modificar');endif; ?> Empleados </h1>
-<form method="post" action="empleado.php?accion=<?php if($accion=="crear"):echo('nuevo');else:echo('modificar&id='.$id);endif; ?>">
+<h1> <?php if($accion=="crear"):echo('Nuevo');else: echo('Modificar');endif; ?> Empleado </h1>
+<form method="post" enctype="multipart/form-data" action="empleado.php?accion=<?php if($accion=="crear"):echo('nuevo');else:echo('modificar&id='.$id);endif; ?>">
     <div class="mb-3">
         <label for="primer_apellido" class="form-label">Primer Apellido</label>
         <input type="text" class="form-control" name="data[primer_apellido]" placeholder="Escribe aqui el primer apellido" 
@@ -22,11 +22,6 @@
         value="<?php if(isset($empleados['rfc'])):echo($empleados['rfc']);endif; ?>" />
     </div>
     <div class="mb-3">
-        <label for="fotografia" class="form-label">fotografia</label>
-        <input type="text" class="form-control" name="data[fotografia]" placeholder="Coloca la fotografia" 
-        value="<?php if(isset($empleados['fotografia'])):echo($empleados['fotografia']);endif; ?>" />
-    </div>
-    <div class="mb-3">
         <label for="" >Usuario</label>
         <select name="data[id_usuario]" id=""  class="form-select">
             <?php foreach($usuarios as $usuario): ?>
@@ -39,6 +34,10 @@
             <option value="<?php echo($usuario['id_usuario']); ?>" <?php echo($selected); ?> ><?php echo($usuario['correo']); ?></option>
             <?php endforeach; ?>
         </select>
+    </div>
+    <div class="mb-3">
+        <label for="fotografia" class="form-label">fotografia</label>
+        <input type="file" class="form-control" name="fotografia" placeholder="Coloca la fotografia"/>
     </div>
     <input type="submit" class="btn btn-success" name="data[enviar]" value="Guardar" />
 </form>

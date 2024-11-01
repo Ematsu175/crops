@@ -24,6 +24,7 @@
             <li><a class="dropdown-item" href="usuario.php">Usuario</a></li>
             <li><a class="dropdown-item" href="roles.php">Roles</a></li>
             <li><a class="dropdown-item" href="permisos.php">Permisos</a></li>
+            <li><a class="dropdown-item" href="empleado.php">Empleados</a></li>
             <li><a class="dropdown-item" href="login.php?accion=logout">Logout</a></li>
           </ul>
         </li>

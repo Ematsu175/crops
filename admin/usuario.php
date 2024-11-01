@@ -38,7 +38,7 @@
         
         case 'modificar':
             $data=$_POST;
-            
+
             $result = $app->update($id,$data);
             //print_r($result);
             if($result){

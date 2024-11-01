@@ -25,8 +25,8 @@
                 <td><?php echo $empleado['segundo_apellido']; ?></td>
                 <td><?php echo $empleado['nombre']; ?></td>
                 <td><?php echo $empleado['rfc']; ?></td>
-                <td><?php echo $empleado['id_usuario']; ?></td>
-                <td><?php echo $empleado['Fotografia']; ?></td>
+                <td><?php echo $empleado['correo']; ?></td>
+                <td><?php echo $empleado['fotografia']; ?></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <a href="empleado.php?accion=actualizar&id=<?php echo $empleado['id_empleado']; ?>" class="btn btn-warning">Actualizar</a>

@@ -1,0 +1,14 @@
+<div class="mb-3">
+        <label for="" >Usuario</label>
+        <select name="data[id_usuario]" id=""  class="form-select">
+            <?php foreach($usuarios as $usuario): ?>
+            <?php 
+                $selected="";
+                if($empleados['id_usuario'] == $usuario['id_usuario']){
+                    $selected = "selected";
+                }
+            ?>
+            <option value="<?php echo($usuario['id_usuario']); ?>" <?php echo($selected); ?> ><?php echo($usuario['correo']); ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
