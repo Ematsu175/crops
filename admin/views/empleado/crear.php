@@ -37,7 +37,8 @@
     </div>
     <div class="mb-3">
         <label for="fotografia" class="form-label">fotografia</label>
-        <input type="file" class="form-control" name="fotografia" placeholder="Coloca la fotografia"/>
+        <input type="file" class="form-control" name="fotografia" placeholder="Coloca la fotografia"
+        value="<?php if(isset($empleados['fotografia'])):echo($empleados['fotografia']);endif; ?>"/>
     </div>
     <input type="submit" class="btn btn-success" name="data[enviar]" value="Guardar" />
 </form>

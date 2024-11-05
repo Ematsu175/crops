@@ -15,11 +15,7 @@
             break;
 
         case 'nuevo':
-            //print_r($_POST);
-            //print_r($_FILES);
-            move_uploaded_file($_FILES['fotografia']['tmp_name'], "C:\\xampp\\htdocs\\crops\\uploads\\".$_FILES['fotografia']['name']);
-            //echo("El archivo se ha cargado");
-            //die();
+            
             $data=$_POST['data'];
             $resultado=$app->create($data);
             if($resultado){
@@ -43,8 +39,6 @@
         case 'modificar':
             $data=$_POST['data'];
             $result = $app->update($id,$data);
-            //print_r($result);
-            //die();
             if($result){
                 $mensaje="Empleado actualizado correctamente";
                 $tipo="success";
