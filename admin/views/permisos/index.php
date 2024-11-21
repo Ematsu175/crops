@@ -1,6 +1,6 @@
 <?php require ('views/header.php') ?>
 <?php require ('views/header/header_administrador.php') ?>
-    <h1>Roles</h1>
+    <h1>Permisos</h1>
     <?php if(isset($mensaje)):$app->alerta($tipo,$mensaje); endif; ?>
     <a href="permisos.php?accion=crear" class="btn btn-success">Nuevo</a>
     <table class="table">
