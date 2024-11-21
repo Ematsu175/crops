@@ -66,6 +66,9 @@
             include('views/seccion/index.php');
             
             break;
+        case 'reporte':
+            $app->reporte();
+            break;
         default:
             $secciones=$app->readAll();
             include('views/seccion/index.php');

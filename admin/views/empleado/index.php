@@ -7,14 +7,12 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
+                <th scope="col">Fotografia</th>
                 <th scope="col">primer_apellido</th>
                 <th scope="col">segundo_apellido</th>
                 <th scope="col">nombre</th>
                 <th scope="col">rfc</th>
                 <th scope="col">Correo</th>
-                <th scope="col">Fotografia</th>
-
-
             </tr>
         </thead>
         <tbody>
@@ -38,6 +36,7 @@
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <a href="empleado.php?accion=actualizar&id=<?php echo $empleado['id_empleado']; ?>" class="btn btn-warning">Actualizar</a>
                         <a href="empleado.php?accion=eliminar&id=<?php echo $empleado['id_empleado']; ?>" class="btn btn-danger">Eliminar</a>
+                        <a href="empleado.php?accion=reporte&id=<?php echo $empleado['id_empleado']; ?>" class="btn btn-success">Imprimir</a>
                     </div>
                 </td>
             </tr>

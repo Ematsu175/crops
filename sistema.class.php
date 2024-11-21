@@ -1,6 +1,11 @@
 <?php
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    
     session_start();
     require_once('config.class.php');
+
     class Sistema{
         var $con;
         function conexion(){
@@ -112,6 +117,34 @@
             }
             
         }
-    }
+
+        function sendMail($destinatario, $asunto, $mensaje){
+            require 'vendor/autoload.php';
+
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            //Enable SMTP debugging
+            //SMTP::DEBUG_OFF = off (for production use)
+            //SMTP::DEBUG_CLIENT = client messages
+            //SMTP::DEBUG_SERVER = client and server messages
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = 465;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->SMTPAuth = true;
+            $mail->Username = '20030356@itcelaya.edu.mx';
+            $mail->Password = 'nyrkcexestznlcmx';
+            $mail->setFrom('20030356@itcelaya.edu.mx', 'Emanuel Vazquez Almanza');
+            $mail->addAddress($destinatario, 'Sistema crops');
+            $mail->Subject = $asunto;
+            $mail->msgHTML($mensaje);
+            $mail->addAttachment('images/phpmailer_mini.png');
+            if (!$mail->send()) {
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                echo 'Message sent!';
+            }
+        }
+}
 
 ?>

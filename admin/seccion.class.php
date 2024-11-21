@@ -1,5 +1,8 @@
 <?php
     require_once('../sistema.class.php');
+    use Spipu\Html2Pdf\Html2Pdf;
+    use Spipu\Html2Pdf\Exception\Html2PdfException;
+    use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
     class Seccion extends Sistema{
         function create($data){
@@ -66,5 +69,67 @@
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }
+
+        function reporte(){
+            require_once '../vendor/autoload.php';
+            $this->conexion();
+
+            $sql="select * from vista_seccion_cantidadInvernaderos;";
+            $consulta=$this->con->prepare($sql);
+            $consulta->execute();
+            $data=$consulta->fetchAll(PDO::FETCH_ASSOC);
+            try {
+                include('../lib/phpqrcode/qrlib.php'); 
+                $id_factura=rand(1,100);
+                $file_name = '../qr/'.$id_factura.'.png';
+                QRcode::png('http://localhost:8080/crops/facturas/'.$id_factura, $file_name,2,2,2);
+                ob_start();
+                $content = ob_get_clean();
+                $content = '
+                <html>
+                    <body>
+                        <table align="center">
+                            <tr>
+                            <th><img src="../images/logocrops.jpg" width=100, height=100 align="center"></th>
+                            </tr>
+                        </table>
+                        <h2>PROYECTO CROPS</h2>
+                        <p>Direccion: Avenida San Francisco Javier 9, Edificio Sevilla 2, planta 2ª módulo 30, C.P 41018, Sevilla</p>
+                        <h2>Reporte CROPS</h2>
+                        
+                        <h3>Secciones e invernaderos</h3>
+                        <table border="1">
+                            <tr>
+                            <th>Seccion</th>
+                            <th>Número de invernaderos</th>
+                            </tr>
+                        ';
+                        foreach($data as $seccion){
+                            $content.='<tr><td>';
+                            $content.=$seccion['seccion'];
+                            $content.='</td>';
+                            $content.='<td>';
+                            $content.=$seccion['cantInvernaderos'];
+                            $content.='</td></tr>';
+                        }
+                        $content.='
+                        </table>
+                        <img src="../qr/'.$id_factura.'.png" width=100, height=100 align="center">
+                    </body>
+                </html>';
+                $html2pdf = new Html2Pdf('P', 'A4', 'fr');
+                $html2pdf->setDefaultFont('Arial');
+                $html2pdf->writeHTML($content);
+                $html2pdf->output('example00.pdf');
+            } catch (Html2PdfException $e) {
+                $html2pdf->clean();
+            
+                $formatter = new ExceptionFormatter($e);
+                echo $formatter->getHtmlMessage();
+            }
+
+        }
+
+        
     }
 ?>
