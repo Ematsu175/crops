@@ -1,3 +1,18 @@
+<?php
+
+if (isset($_SERVER['REQUEST_URI'])) {
+    $url = $_SERVER['REQUEST_URI'];
+    if (substr($url, 0, 7)!=='http://') {
+        $url = 'http://'.$_SERVER['HTTP_HOST'];
+        if (ISSET($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT']!=80) {
+            $url.= ':'.$_SERVER['SERVER_PORT'];
+        }
+        $url.= $_SERVER['REQUEST_URI'];
+    }
+} else {
+    $url = 'http://localhost/html2pdf/examples/forms.php';
+}
+?>
 <style type="text/css">
 li
 { font-size: 10pt; }
@@ -11,10 +26,10 @@ input, textarea, select
     font-size: 11pt;
 }
 </style>
-<page footer="form,date,time">
+<page footer="form">
     <h1>Test de formulaire</h1><br>
     <br>
-    <form>
+    <form action="<?php echo $url; ?>">
         <input type="hidden" name="test" value="1">
         Vous utilisez cette librairie dans le cadre :
         <ul style="list-style: none">
@@ -51,5 +66,6 @@ input, textarea, select
         <br>
         <input type="reset" name="btn_reset" value="Initialiser">
         <input type="button" name="btn_print" value="Imprimer" onclick="print(true);">
+        <input type="submit" name="btn_submit" value="Envoyer">
     </form>
 </page>

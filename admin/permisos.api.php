@@ -11,12 +11,15 @@
 
         case 'POST':
             $datos=$_POST;
-            $resultado=$app->create($datos);
-            //echo $resultado;
+            if(!is_null($id) && is_numeric($id)){
+                $result = $app->update($id, $datos);
+            } else {
+                $result = $app->create($datos);
+            }
             if($resultado == 1){
-                $data['mensaje']="El permiso se creo correctamente";
+                $data['mensaje']="El permiso se ha guardado correctamente";
             } else{
-                $data['mensaje']="Ocurrio algun error";
+                $data['mensaje']="Ocurrio algun error con el servicio";
             }
             
             break;

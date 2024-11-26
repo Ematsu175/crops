@@ -1,48 +1,111 @@
-# Html2Pdf
+HTML2PDF v4.6.1 - 2016-04-05
+============================
 
-Html2Pdf is a HTML to PDF converter written in PHP, and compatible with PHP **5.6** to **8.2**.
+License:
+--------
+```
+ This program is distributed under the LGPL License,
+ for more information see file _LGPL.txt or
+ http://www.gnu.org/licenses/lgpl.html
 
-It allows the conversion of valid HTML in PDF format, to generate documents like invoices, documentation, ...
+ Copyright 2008-2016 by Laurent Minguet
+```
 
-You have to write a code of HTML for Html2Pdf, and not try to convert directly an already existing html page.
+How to use:
+-----------
 
-Specific tags have been implemented, to adapt the html standard to a PDF usage.
+ * You need at least PHP 5.3.2
+ 
+ * Use composer to install it
+   * Composer : https://getcomposer.org/
+   * Official Package : spipu/html2pdf
+    
+ * If you install html2pdf without using composer, it will not work directly.
+   You must do "composer install" on the html2pdf folder
+   in order to install the TCPDF dependency. 
+   
+ * Look at the examples provided to see how it works.
 
-You must use Composer to install this library.
+ * It is very important to provide valid HTML 4.01 to the converter,
+   but only what is in the `<body>`. Use the `<page>` tag. 
 
-It uses TCPDF for the PDF part.
+ * for borders: it is advised that they are like `solid 1mm #000000`
 
-## Requirements
+ * for padding, they are applicable only on tags table, th, td, div, li
 
-Html2Pdf works with PHP >5.6 and Composer.
+ * A default font can be specified, if the requested font does not exist or if no font is specified:
+ 
+ `$html2pdf->setDefaultFont('Arial');`
 
-You will also need at least the following php extensions:
+ * The possibility to protect your PDF is present, CF Example 7.
 
-* gd
-* mbstring
+ * Some tests can be enabled (true) or disabled (false):
 
-## Documentation
+  * setTestIsImage method:      test that images must exist
 
-You will find the install documentation [here](./doc/install.md).
+  * setTestTdInOnePage method:  test that the contents of TDs fit on one page
 
-You will find all the documentation [here](./doc/README.md).
+  * setTestIsDeprecated method: test that old properties of specific tags are not used anymore
 
-You will find lots of examples [here](./examples/).
+ * A DEBUG mode to know the resources used is present.
+It is activated by adding the following command just after the contructor (see Example 0):
+`$htmlpdf->setModeDebug();`
 
-## Donate
+* Some specific tags have been introduced:
 
-You can support this project by making a [donation](http://html2pdf.fr/en/donate).
+  * <page></page>  (CF Exemple 7 & wiki)
+    * Determines the orientation, margins left, right, top and bottom, the background image
+    * and the background color of a page, its size and position, the footer.
+    * It is also possible to keep the header and footer of the previous pages,
+    * through the attribut pageset="old" (see Example 3 & 4 & wiki)
 
-## Change log
+  * <page_header></page_header> (CF Example 3 & wiki)
 
-See the [./CHANGELOG.md](./CHANGELOG.md) file.
+  * <page_footer></page_footer> (CF Example 3 & wiki)
 
-## Help & Support
+  * <nobreak></nobreak> (CF wiki)
+    * Used to force the display of a section on the same page.
+    * If this section does not fit into the rest of the page, a page break is done before.
 
-For questions and bug reports, please use the GitHub issues page.
+  * <barcode></barcode>  (CF Examples 0 & 9 & wiki)
+    * Can insert barcodes in pdfs, CF Examples 0 and 9
+    * the possible types of codebar are alls of TCPDF
 
-## License
+  * <qrcode></qrcode> (CF Example 13 & wiki)
+    * can insert QRcode 2D barcodes
+    * (QR Code is registered trademark of DENSO WAVE INCORPORATED | http://www.denso-wave.com/qrcode/)
 
-This program is distributed under the OSL License. For more information see the [./LICENSE.md](./LICENSE.md) file.
+  * <bookmark></bookmark> (CF Examples 7 & About & wiki)
+    * Can insert bookmark in pdfs, CF Example 7 and About.
+    * It is also possible to automatically create an index at the end of document (CF Example About & wiki)
 
-Copyright 2008-2023 by Laurent Minguet
+  * css property "rotate":
+    * Values : 0, 90, 180, 270
+    * Works only on div (cf example 8)
+
+Change log:
+-----------
+
+See on this page: http://html2pdf.fr/en/download
+
+Help & Support:
+---------------
+
+For questions and bug reports, thank you to use only the support link below.
+I will answer to your questions only on it...
+
+Informations:
+-------------
+
+* Programmer: Spipu
+* Web Site  : http://html2pdf.fr/
+* Wiki      : http://html2pdf.fr/en/wiki
+* Support   : http://html2pdf.fr/en/forum
+
+Thanks:
+-------
+
+ * Olivier Plathey: for have made FPDF
+ * Nicola Asuni: for the changes he has agreed to make to TCPDF
+ * yAronet: for hosting support forum
+ * Everyone who helped me to develop this library and to bring the texts

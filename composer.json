@@ -1,6 +1,7 @@
 {
     "require": {
         "phpmailer/phpmailer": "*",
-        "spipu/html2pdf": "*"
+        "spipu/html2pdf": "*",
+        "phpoffice/phpspreadsheet": "^3.5"
     }
 }

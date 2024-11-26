@@ -17,7 +17,7 @@
                     A propos de ...
                 </td>
                 <td style="width: 50%; text-align: right">
-                    Html2Pdf v<?php echo $html2pdf->getVersion(); ?>
+                    HTML2PDF v<?php echo $html2pdf->getVersion(); ?>
                 </td>
             </tr>
         </table>
@@ -32,30 +32,30 @@
                     page [[page_cu]]/[[page_nb]]
                 </td>
                 <td style="width: 33%; text-align: right">
-                    &copy;Spipu 2008-<?php echo date('Y'); ?>
+                    &copy;Spipu 2008-2015
                 </td>
             </tr>
         </table>
     </page_footer>
     <bookmark title="Présentation" level="0" ></bookmark>
     <br><br><br><br><br><br><br><br>
-    <h1>Html2Pdf</h1>
+    <h1>HTML2PDF</h1>
     <h3>v<?php echo $html2pdf->getVersion(); ?></h3><br>
     <br><br><br><br><br>
     <div style="text-align: center; width: 100%;">
         <br>
-        <img src="./res/logo.png" alt="Logo Html2Pdf" style="width: 150mm">
+        <img src="./res/logo.png" alt="Logo HTML2PDF" style="width: 150mm">
         <br>
     </div>
     <br><br><br><br><br>
     <div class="note">
-        Html2Pdf est un convertisseur de code HTML vers PDF écrit en PHP5, utilisant la librairie <a href="http://tcpdf.org">TCPDF.</a><br>
+        HTML2PDF est un convertisseur de code HTML vers PDF écrit en PHP5, utilisant la librairie <a href="http://tcpdf.org">TCPDF.</a><br>
         <br>
-        Il permet la conversion d'HTML et d'xHTML valide au format PDF, et est distribué sous licence OSL-3.0.<br>
+        Il permet la conversion d'HTML et d'xHTML valide au format PDF, et est distribué sous licence LGPL.<br>
         <br>
         Cette librairie a été conçue pour gérer principalement les TABLE imbriquées afin de générer des factures, bon de livraison, et autres documents officiels.<br>
         <br>
-        Vous pouvez télécharger la dernière version de Html2Pdf ici : <a href="http://html2pdf.fr/">http://html2pdf.fr/</a>.<br>
+        Vous pouvez télécharger la dernière version de HTML2PDF ici : <a href="http://html2pdf.fr/">http://html2pdf.fr/</a>.<br>
     </div>
 </page>
 <page pageset="old">
@@ -71,7 +71,7 @@
     </div>
     <br>
     <ul class="main">
-        <li>&lt;a&gt; : Ceci est un lien vers <a href="http://html2pdf.fr">le site de Html2Pdf</a></li>
+        <li>&lt;a&gt; : Ceci est un lien vers <a href="http://html2pdf.fr">le site de HTML2PDF</a></li>
         <li>&lt;b&gt;, &lt;strong&gt; : Ecrire en <b>gras</b>.</li>
         <li>&lt;big&gt; : Ecrire plus <big>gros</big>.</li>
         <li>&lt;br&gt; : Permet d'aller à la ligne</li>
@@ -90,7 +90,7 @@
         <li>&lt;sup&gt; : Exemple<sup>haut</sup>.</li>
         <li>&lt;sub&gt; : Exemple<sub>bas</sub>.</li>
         <li>&lt;u&gt; : Texte <u>souligné</u></li>
-        <li>&lt;table&gt;, &lt;td&gt;, &lt;th&gt;, &lt;tr&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;, &lt;col&gt;, &lt;colgroup&gt; </li>
+        <li>&lt;table&gt;, &lt;td&gt;, &lt;th&gt;, &lt;tr&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;, &lt;col&gt; </li>
         <li>&lt;ol&gt;, &lt;ul&gt;, &lt;li&gt;</li>
         <li>&lt;form&gt;, &lt;input&gt;, &lt;textarea&gt;, &lt;select&gt;, &lt;option&gt;</li>
         <li>&lt;fieldset&gt;, &lt;legend&gt;</li>
@@ -237,6 +237,6 @@
         <li>Elle ne permet généralement pas la conversion directe d'une page HTML en PDF, ni la conversion du résultat d'un WYSIWYG en PDF.</li>
         <li>Cette librairie est là pour faciliter la génération de documents PDF, pas pour convertir n'importe quelle page HTML.</li>
         <li>Les formulaires ne marchent pas avec tous les viewers PDFs...</li>
-        <li>Lisez bien la documentation : <a href="https://github.com/spipu/html2pdf/blob/master/doc/README.md">https://github.com/spipu/html2pdf/blob/master/doc/README.md</a>.</li>
+        <li>Lisez bien le wiki : <a href="http://wiki.spipu.net/doku.php?id=html2pdf:Accueil">http://wiki.spipu.net/doku.php?id=html2pdf:Accueil</a>.</li>
     </ul>
 </page>
