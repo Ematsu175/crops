@@ -14,6 +14,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="invernadero.php">Invernaderos</a></li>
             <li><a class="dropdown-item" href="seccion.php">Secciones</a></li>
+            <li><a class="dropdown-item" href="informe.php">Descargar Infrome</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
